@@ -1,24 +1,38 @@
-#COMMIT STRUCTURE
-ABEL: 001 [Message] # para diagramas
-ABEL: 002 [Message] # para proyecto product
-ABEL: 003 [Message] # para proyecto order
-ABEL: 004 [Message] # para proyecto inventory
-ABEL: 005 [Message] # para proyecto discovery
-ABEL: 006 [Message] # para proyecto apiGatawey
-ABEL: 007 [Message] # para proyecto Proyect General
+🚀 Proyectos y Estructura de Commits
+Esta sección describe la convención de commits utilizada para la organización del proyecto.
 
+ABEL: 001 [Message]: Cambios relacionados con diagramas.
 
-#URI PROYECT
-https://start.spring.io/ # Para crear proyectos basados en springBoot
+ABEL: 002 [Message]: Cambios en el proyecto de product.
+
+ABEL: 003 [Message]: Cambios en el proyecto de order.
+
+ABEL: 004 [Message]: Cambios en el proyecto de inventory.
+
+ABEL: 005 [Message]: Cambios en el proyecto de discovery.
+
+ABEL: 006 [Message]: Cambios en el proyecto de apiGateway.
+
+ABEL: 007 [Message]: Cambios generales del proyecto.
+
+🛠️ Herramientas y Dependencias
+Esta sección contiene enlaces útiles para el desarrollo y configuración del entorno.
+
+Creación de Proyectos
+Spring Initializr: Utiliza este enlace para crear nuevos proyectos basados en Spring Boot.
+
+https://start.spring.io/
+
+Base de Datos
+MongoDB Community Server: Descarga la versión 8.0.12 para Windows x64.
 
 https://www.mongodb.com/try/download/community
-Version 8.0.12 (current)
-Platform Windows x64
-Package msi
 
+Dependencias para Pruebas Unitarias
+Testcontainers: Biblioteca para pruebas de integración con contenedores.
 
-#TEST UNIT DOC DEPENDENCY TO POM
 https://java.testcontainers.org/
-https://java.testcontainers.org/modules/databases/mongodb/
-https://java.testcontainers.org/test_framework_integration/junit_5/
 
+Módulo de MongoDB para Testcontainers
+
+Integración con JUnit 5
