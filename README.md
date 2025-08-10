@@ -2,6 +2,10 @@
 ABEL: 001 [Message] # para diagramas
 ABEL: 002 [Message] # para proyecto product
 ABEL: 003 [Message] # para proyecto order
+ABEL: 004 [Message] # para proyecto inventory
+ABEL: 005 [Message] # para proyecto discovery
+ABEL: 006 [Message] # para proyecto apiGatawey
+ABEL: 007 [Message] # para proyecto Proyect General
 
 
 #URI PROYECT
