@@ -3,15 +3,16 @@ package com.dataprogramming.orderService.service;
 import com.dataprogramming.orderService.dto.InventoryResponse;
 import com.dataprogramming.orderService.dto.OrderLineItemsDto;
 import com.dataprogramming.orderService.dto.OrderRequest;
+import com.dataprogramming.orderService.event.OrderPlacedEvent;
 import com.dataprogramming.orderService.model.Order;
 import com.dataprogramming.orderService.model.OrderLineItems;
 import com.dataprogramming.orderService.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -23,8 +24,9 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
-    public void placeOrder(OrderRequest orderRequest) {
+    public String placeOrder(OrderRequest orderRequest) {
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
 
@@ -40,7 +42,7 @@ public class OrderService {
                 .toList();
 
         InventoryResponse[] inventoryResponsesArray =  webClientBuilder.build().get()
-                .uri("http://localhost:8082/api/inventory",
+                .uri("http://inventoryService/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCode).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)
@@ -51,6 +53,8 @@ public class OrderService {
 
         if (allProductsInStock) {
             orderRepository.save(order);
+            kafkaTemplate.send("notificationTopic", new OrderPlacedEvent(order.getOrderNumber()));
+            return "Order Placed Successfully";
         } else {
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }
@@ -64,4 +68,3 @@ public class OrderService {
         return orderLineItems;
     }
 }
-
