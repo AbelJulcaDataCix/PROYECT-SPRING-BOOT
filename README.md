@@ -30,9 +30,16 @@ https://www.mongodb.com/try/download/community
 
 Dependencias para Pruebas Unitarias
 Testcontainers: Biblioteca para pruebas de integración con contenedores.
+Módulo de MongoDB para Testcontainers
+Integración con JUnit 5
 
 https://java.testcontainers.org/
 
-Módulo de MongoDB para Testcontainers
 
-Integración con JUnit 5
+Para el token de seguridad se utilizo la imagen de keycloak en docker
+https://www.keycloak.org/getting-started/getting-started-docker
+
+
+Para la trazabilidad
+https://zipkin.io/pages/quickstart.html
+docker run -d -p 9411:9411 openzipkin/zipkin
